@@ -1,0 +1,19 @@
+services:
+  nextjs-app:
+    image: nextjs-app
+    container_name: nextjs-app
+    build:
+      context: .
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules # managed by docker. Restrict local yarn to get access
+      - build:/app/.next # managed by docker. Restrict local yarn to get access
+    env_file:
+      - .env
+
+
+volumes:
+  node_modules:
+  build:
